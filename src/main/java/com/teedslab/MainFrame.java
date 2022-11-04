@@ -6,7 +6,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Toolkit;
-
+import java.awt.MouseInfo;
+import java.awt.Point;
 
 /**
  * This class represents the main containing frame for the application
@@ -18,6 +19,7 @@ public class MainFrame extends JFrame {
     private JPanel background;
     private int width, height;
     private Dimension resolution;
+    private Velocity velocity;
 
     /**
      * initializes the global objects
@@ -27,6 +29,8 @@ public class MainFrame extends JFrame {
 
         width = 100;
         height = 100;
+        // mover = new Mover(0, 0);
+        velocity = new Velocity(this);
 
         resolution = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -55,11 +59,36 @@ public class MainFrame extends JFrame {
         setSize(new Dimension(width,height));
     }
 
+    public void moveToCursor() {
+        while(true) {
+            try {
+                Thread.sleep(15);
+            } catch(Exception e) {}
+            
+            
+            double[] velocities = velocity.getVelocity();
+
+            double xo = this.getLocation().getX() + velocities[0];
+            double yo = this.getLocation().getY() + velocities[1];
+            
+
+            this.setLocation((int) xo, (int) yo);
+        }
+        
+    
+    }
+
     public void moveToRandom() {
         int x = (int) (Math.random() * resolution.getWidth());
         int y = (int) (Math.random() * resolution.getHeight());
+        // mover.move(this, x, y);
+    }
 
-
+    private boolean inRange(double x1, double y1, double x2, double y2) {
+        if(Math.abs(Math.abs(x1) - Math.abs(x2)) < 10 && Math.abs(Math.abs(y1) - Math.abs(y2)) < 10) {
+            return true;
+        }
+        return false;
     }
 
     public void moveTo(int x, int y) {
