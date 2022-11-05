@@ -14,7 +14,7 @@ public class App
         //     try {
                 // Thread.sleep(1000);
             // } catch(Exception e) {}
-            frame.moveToCursor();
+            frame.moveToRandom();
         // }
         
     }

@@ -19,7 +19,6 @@ public class MainFrame extends JFrame {
     private JPanel background;
     private int width, height;
     private Dimension resolution;
-    private Velocity velocity;
 
     /**
      * initializes the global objects
@@ -29,8 +28,6 @@ public class MainFrame extends JFrame {
 
         width = 100;
         height = 100;
-        // mover = new Mover(0, 0);
-        velocity = new Velocity(this);
 
         resolution = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -51,7 +48,7 @@ public class MainFrame extends JFrame {
      * @param height - the height of the frame
      */
     public MainFrame(int width, int height) {
-        this();
+        this(); //re-calls the constructor 
 
         this.width = width;
         this.height = height;
@@ -59,37 +56,63 @@ public class MainFrame extends JFrame {
         setSize(new Dimension(width,height));
     }
 
+    /**
+     * sets the frame to follow the mouse
+     */
     public void moveToCursor() {
+
+        MouseFollower velocity = new MouseFollower(this);
+
         while(true) {
+
+            //refresh rate - 15 ms
             try {
                 Thread.sleep(15);
             } catch(Exception e) {}
             
-            
+            //gets the x, y, velocities
             double[] velocities = velocity.getVelocity();
 
-            double xo = this.getLocation().getX() + velocities[0];
-            double yo = this.getLocation().getY() + velocities[1];
+            //adds the velocities to the current cordinates
+            int x = (int) (this.getLocation().getX() + velocities[0]);
+            int y = (int) (this.getLocation().getY() + velocities[1]);
             
-
-            this.setLocation((int) xo, (int) yo);
+            //updates the current location
+            this.setLocation(x, y);
         }
-        
-    
+
     }
 
+    /**
+     * 
+     */
     public void moveToRandom() {
-        int x = (int) (Math.random() * resolution.getWidth());
-        int y = (int) (Math.random() * resolution.getHeight());
-        // mover.move(this, x, y);
+
+        Velocity velocity = new Velocity();
+
+        int wantedX = (int) (Math.random() * resolution.getWidth());
+        int wantedY = (int) (Math.random() * resolution.getHeight());
+        
+        int x = (int) this.getLocation().getX();
+        int y = (int) this.getLocation().getY();
+
+        // velocity.move(this, x, y);
+        while(velocity.inRange(wantedX, wantedY, x, y)) {
+            
+            try {
+                Thread.sleep(15);
+            } catch(Exception e) {}
+
+            //adds the velocities to the current cordinates
+            x = (int) (this.getLocation().getX() + velocity.getVelocityX());
+            y = (int) (this.getLocation().getY() + velocity.getVelocityY());
+            
+            //updates the current location
+            this.setLocation(x, y);
+        }
     }
 
-    private boolean inRange(double x1, double y1, double x2, double y2) {
-        if(Math.abs(Math.abs(x1) - Math.abs(x2)) < 10 && Math.abs(Math.abs(y1) - Math.abs(y2)) < 10) {
-            return true;
-        }
-        return false;
-    }
+    
 
     public void moveTo(int x, int y) {
         
