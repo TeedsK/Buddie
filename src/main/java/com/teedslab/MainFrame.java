@@ -16,9 +16,9 @@ import java.awt.Point;
  */
 public class MainFrame extends JFrame {
     
-    private JPanel background;
-    private int width, height;
-    private Dimension resolution;
+    private JPanel background; // the background of the frame
+    private int width, height; // the width and height of the frame
+    private Dimension resolution; // the width and height of the screen
 
     /**
      * initializes the global objects
@@ -83,25 +83,29 @@ public class MainFrame extends JFrame {
 
     }
 
+    
+
     /**
-     * 
+     * moves the frame to a random location
      */
     public void moveToRandom() {
 
         Velocity velocity = new Velocity();
 
-        int wantedX = (int) (Math.random() * resolution.getWidth());
-        int wantedY = (int) (Math.random() * resolution.getHeight());
+        int wantedX = (int) (Math.random() * resolution.getWidth()) - 10;
+        int wantedY = (int) (Math.random() * resolution.getHeight()) - 10;
         
         int x = (int) this.getLocation().getX();
         int y = (int) this.getLocation().getY();
 
         // velocity.move(this, x, y);
-        while(velocity.inRange(wantedX, wantedY, x, y)) {
+        while(!velocity.inRange(wantedX, wantedY, x, y)) {
             
             try {
                 Thread.sleep(15);
             } catch(Exception e) {}
+
+            velocity.updateAcceleration(this.getLocation().getX(), this.getLocation().getY(), wantedX, wantedY);
 
             //adds the velocities to the current cordinates
             x = (int) (this.getLocation().getX() + velocity.getVelocityX());
@@ -112,9 +116,4 @@ public class MainFrame extends JFrame {
         }
     }
 
-    
-
-    public void moveTo(int x, int y) {
-        
-    }
 }
