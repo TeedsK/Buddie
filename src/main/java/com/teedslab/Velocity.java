@@ -172,4 +172,12 @@ public class Velocity {
         return Math.abs(Math.abs(x1) - Math.abs(x2)) < 10 && Math.abs(Math.abs(y1) - Math.abs(y2)) < 10;
     }
 
+    /**
+     * sets the current friction count
+     * 
+     * @param friction - the amount of friction to feel 
+     */
+    public void setFriction(double friction) {
+        this.friction = friction;
+    }
 }

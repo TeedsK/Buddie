@@ -14,8 +14,11 @@ public class App
         //     try {
                 // Thread.sleep(1000);
             // } catch(Exception e) {}
-            frame.moveToRandom();
+            Character character = new Character(frame);
+            
+            frame.setCharacter(character);
         // }
+        frame.moveToCursor();
         
     }
 }

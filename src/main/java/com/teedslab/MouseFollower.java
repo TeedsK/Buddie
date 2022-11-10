@@ -3,6 +3,8 @@ package com.teedslab;
 import java.awt.MouseInfo;
 import java.awt.Point;
 
+import javax.swing.JComponent;
+
 /**
  * This class represents a version of the Velocity class
  * this makes the frame follow the mouse changing velocity along the way
@@ -11,15 +13,15 @@ import java.awt.Point;
  */
 public class MouseFollower extends Velocity {
 
-    MainFrame frame;
+    JComponent component;
 
     /**
      * @param frame - the frame to move
      */
-    public MouseFollower(MainFrame frame) {
+    public MouseFollower(JComponent component) {
         super();
-        this.frame = frame;
-
+        this.component = component;
+        this.setFriction(0.05);
     }
     
     /**
@@ -30,9 +32,8 @@ public class MouseFollower extends Velocity {
      */
     public double[] getVelocity() {
         Point mouse = MouseInfo.getPointerInfo().getLocation();
-        
-        updateAcceleration(frame.getLocation().getX(), frame.getLocation().getY(), mouse.getX(), mouse.getY());
+        updateAcceleration(component.getLocationOnScreen().getX(), component.getLocationOnScreen().getY(), mouse.getX(), mouse.getY());
         
         return new double[] {getVelocityX(),getVelocityY()};
-    }    
+    }
 }
