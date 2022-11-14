@@ -9,16 +9,12 @@ public class App
 {
     public static void main( String[] args )
     {
-        MainFrame frame = new MainFrame();
-        // while(true) {
-        //     try {
-                // Thread.sleep(1000);
-            // } catch(Exception e) {}
-            Character character = new Character(frame);
+        Menu menu = new Menu();
+        // MainFrame frame = new MainFrame();
+        // Character character = new Character(frame);
             
-            frame.setCharacter(character);
-        // }
-        frame.moveToCursor();
+        // frame.setCharacter(character);
+        // frame.moveToCursor();
         
     }
 }

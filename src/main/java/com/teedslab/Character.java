@@ -17,12 +17,16 @@ import java.awt.MouseInfo;
  * 
  * @author Theo Kremer
  */
-public class Character extends JPanel{
+public class Character extends JPanel {
 
+    //the width and height of the character
     int imgWidth, imgHeight;
     MainFrame frame;
     Image img;
 
+    /**
+     * @param frame - the frame holding the character
+     */
     public Character(MainFrame frame) {
         this.frame = frame;
         this.imgWidth = 50;
@@ -30,13 +34,16 @@ public class Character extends JPanel{
         setSize(60, 60);
         setPreferredSize(new Dimension(60, 60));
         setOpaque(false);
-        String location = "src/main/java/com/teedslab/Characters/Cars/car1.png";
+        String location = "src/main/java/com/teedslab/Characters/Cars/car3.png";
         try {
             BufferedImage img = ImageIO.read(new File(location));
             this.img = img.getScaledInstance(imgWidth - 10, imgHeight - 10, Image.SCALE_SMOOTH);
         } catch(Exception e) {}
     }
 
+    /**
+     * paints the character
+     */
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -55,6 +62,9 @@ public class Character extends JPanel{
         g2d.dispose();
     }
 
+    /**
+     * @return double - the degree to rotate the character towards the mouse
+     */
     private double getRotation() {
         Point mousePoint = MouseInfo.getPointerInfo().getLocation();
 
@@ -68,13 +78,4 @@ public class Character extends JPanel{
 
         return Math.toDegrees(rotation) + 180;
     }
-
-    /**
-     * 
-     * @return
-     */
-    public JPanel getCharacterImage() {
-        return this;
-    }
-
 }

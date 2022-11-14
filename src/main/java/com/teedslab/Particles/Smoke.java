@@ -25,29 +25,33 @@ public class Smoke extends Particle {
         setPreferredSize(new Dimension(width, height));
         setOpacity(255);
         setOpacityIterator(25);
-        setBackground(new Color(255,255,255,0));
+        setVisible(false);
+        setBackground(new Color(200,200,200,255));
     }
 
     public void start(final Character character, final double[] velocities) {
-        setVisible(true);
+        
+
         Thread t = new Thread() {
             public void run() {
 
                 int x = character.getX() + (character.getWidth() / 2) + getRandomNumberUsingNextInt(-5, 5);
                 int y = character.getY() + (character.getHeight() / 2) + getRandomNumberUsingNextInt(-5, 5);
 
+                setLocation((int) x, (int) y);
 
+                setVisible(true);
+               
                 Thread t2 = new Thread() {
                     public void run() {
-                        fade(0);
+                        if(fade(0))
+                            Smoke.this.getParent().remove(Smoke.this);
                     }
                 }; 
 
                 t2.start();
 
-                
-                for(int i = 0; i < 100; i++) {
-
+                while(getBackground().getAlpha() > 0) {
                     x -= velocities[0];
                     y -= velocities[1];
     
@@ -57,6 +61,8 @@ public class Smoke extends Particle {
                         Thread.sleep(10);
                     } catch(Exception e) {}
                 }
+                
+                
             }
         }; t.start();
     }

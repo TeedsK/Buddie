@@ -85,7 +85,10 @@ public class MainFrame extends JFrame {
         int x = (background.getWidth() - character.getWidth()) / 2;
         int y = (background.getHeight() - character.getHeight()) / 2;
         character.setLocation(x, y);
+        
         background.add(character);
+        // background.setComponentZOrder(character, 0);
+
         background.repaint();
         background.revalidate();
     }
@@ -115,12 +118,11 @@ public class MainFrame extends JFrame {
             for(int i = 0; i < 3; i++) {
                 Smoke smoke = new Smoke();
                 background.add(smoke);
+                background.setComponentZOrder(smoke, 1);
+                background.setComponentZOrder(character, 0);
+                background.repaint();
                 smoke.start(character, velocities);
             }
-            
-
-            //updates the current location
-            background.repaint();
             
             // this.setLocation(-100, -100);
             this.setLocation(x, y);

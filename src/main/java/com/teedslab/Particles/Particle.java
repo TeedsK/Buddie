@@ -19,7 +19,6 @@ public class Particle extends JPanel {
     public Particle() {
         this.opacityIterator = 10;
         this.opacity = 255;
-        setVisible(true);
     }
 
     public boolean fade(int target) {

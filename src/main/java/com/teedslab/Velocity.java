@@ -19,9 +19,9 @@ public class Velocity {
      * Initializes the global variables
      */
     public Velocity() {
-        maxSpeed = 10;
+        maxSpeed = 20;
         acceleration = 0.25;
-        friction = 0.1;
+        friction = 0.01;
         speeds = new double[] {0, 0};
         deceleration = new double[] {0, 0};
     }
