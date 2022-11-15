@@ -1,4 +1,4 @@
-package com.teedslab.PressSpreadButton;
+package com.teedslab.Clean;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -259,7 +259,7 @@ public class PressSpreadButton extends JPanel implements MouseListener {
      * @param image the file location of the image
      */
     public void setImage(String i) {
-        Image p1 = Toolkit.getDefaultToolkit().getImage(getClass().getResource(i));
+        Image p1 = Toolkit.getDefaultToolkit().getImage(i);
         Image p2 = p1.getScaledInstance(17,17, Image.SCALE_SMOOTH);
         ImageIcon p3 = new ImageIcon(p2);
         image.setIcon(p3);

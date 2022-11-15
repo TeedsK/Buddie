@@ -1,4 +1,4 @@
-package com.teedslab.PressSpreadButton;
+package com.teedslab.Clean;
 
 public class PressSpreadButtonCircle {
     int radius = 0;
