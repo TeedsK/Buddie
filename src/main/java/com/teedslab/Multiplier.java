@@ -43,6 +43,10 @@ public class Multiplier extends JPanel {
         addButtons();
     }
 
+    public double getMultiplier() {
+        return multiplier;
+    }
+
     /**
      * Adds the multiplier buttons
      */

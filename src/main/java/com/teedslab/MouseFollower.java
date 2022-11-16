@@ -18,8 +18,8 @@ public class MouseFollower extends Velocity {
     /**
      * @param frame - the frame to move
      */
-    public MouseFollower(JComponent component) {
-        super();
+    public MouseFollower(double slipperyX, double speedX, JComponent component) {
+        super(slipperyX, speedX);
         this.component = component;
         this.setFriction(0.05);
     }

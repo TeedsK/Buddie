@@ -8,7 +8,7 @@ package com.teedslab;
  */
 public class Velocity {
     
-    private int maxSpeed;
+    private double maxSpeed;
     private double acceleration;
     private double friction;
 
@@ -18,10 +18,10 @@ public class Velocity {
     /**
      * Initializes the global variables
      */
-    public Velocity() {
-        maxSpeed = 20;
-        acceleration = 0.25;
-        friction = 0.01;
+    public Velocity(double slipperyX, double speedX) {
+        maxSpeed = 20 * speedX;
+        acceleration = 0.25 * speedX;
+        friction = 0.1 / slipperyX;
         speeds = new double[] {0, 0};
         deceleration = new double[] {0, 0};
     }

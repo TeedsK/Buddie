@@ -11,7 +11,7 @@ public class App
     {
         Menu menu = new Menu();
         // MainFrame frame = new MainFrame();
-        // Character character = new Character(frame);
+        // Character character = new Character(frame, "src/main/java/com/teedslab/Characters/Cars/car1.png");
             
         // frame.setCharacter(character);
         // frame.moveToCursor();

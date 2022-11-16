@@ -22,15 +22,18 @@ public class MainFrame extends JFrame {
     private int width, height; // the width and height of the frame
     private Dimension resolution; // the width and height of the screen
     private Character character; //the character 
-
+    private double slipperyX;
+    private double speedX;
     /**
      * initializes the global objects
      */
-    public MainFrame() {
+    public MainFrame(double slipperyX, double speedX) {
         super("Buddie");
 
         width = 200;
         height = 200;
+        this.slipperyX = slipperyX;
+        this.speedX = speedX;
 
         resolution = Toolkit.getDefaultToolkit().getScreenSize();
 
@@ -45,7 +48,7 @@ public class MainFrame extends JFrame {
         background.setPreferredSize(new Dimension(width,height));
         background.setBackground(new Color(102, 95, 255));
         background.setLayout(null);
-        // background.setOpaque(false);
+
         
         add(background);
         
@@ -60,8 +63,8 @@ public class MainFrame extends JFrame {
      * @param width - the width of the frame
      * @param height - the height of the frame
      */
-    public MainFrame(int width, int height) {
-        this(); //re-calls the constructor 
+    public MainFrame(double slipperyX, double speedX, int width, int height) {
+        this(slipperyX, speedX); //re-calls the constructor 
 
         this.width = width;
         this.height = height;
@@ -99,15 +102,10 @@ public class MainFrame extends JFrame {
      */
     public void moveToCursor() {
 
-        MouseFollower velocity = new MouseFollower(character);
+        MouseFollower velocity = new MouseFollower(slipperyX, speedX, character);
 
-        while(true) {
+        while(this.isDisplayable()) {
 
-            //refresh rate - 15 ms
-            try {
-                Thread.sleep(15);
-            } catch(Exception e) {}
-            
             //gets the x, y, velocities
             double[] velocities = velocity.getVelocity();
 
@@ -126,6 +124,12 @@ public class MainFrame extends JFrame {
             
             // this.setLocation(-100, -100);
             this.setLocation(x, y);
+
+            //refresh rate - 15 ms
+            try {
+                Thread.sleep(15);
+            } catch(Exception e) {}
+            
         }
 
     }
@@ -137,7 +141,7 @@ public class MainFrame extends JFrame {
      */
     public void moveToRandom() {
 
-        Velocity velocity = new Velocity();
+        Velocity velocity = new Velocity(slipperyX, speedX);
 
         int wantedX = (int) (Math.random() * resolution.getWidth()) - 10;
         int wantedY = (int) (Math.random() * resolution.getHeight()) - 10;

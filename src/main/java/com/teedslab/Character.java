@@ -27,14 +27,13 @@ public class Character extends JPanel {
     /**
      * @param frame - the frame holding the character
      */
-    public Character(MainFrame frame) {
+    public Character(MainFrame frame, String location) {
         this.frame = frame;
         this.imgWidth = 50;
         this.imgHeight = 50;
         setSize(60, 60);
         setPreferredSize(new Dimension(60, 60));
         setOpaque(false);
-        String location = "src/main/java/com/teedslab/Characters/Cars/car3.png";
         try {
             BufferedImage img = ImageIO.read(new File(location));
             this.img = img.getScaledInstance(imgWidth - 10, imgHeight - 10, Image.SCALE_SMOOTH);
