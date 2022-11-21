@@ -84,7 +84,7 @@ public class Menu extends JFrame {
         panel.setOpaque(false);
 
         for(int i = 0; i < 4; i++) {
-            CarSelection car = new CarSelection("src/main/java/com/teedslab/Characters/Cars/car" + (i + 1) + ".png", new Color(27, 30, 39), new Color(44, 46, 61), new Color(95, 98, 123), new Color(95, 98, 123), 15);
+            CarSelection car = new CarSelection("./Characters/Cars/car" + (i + 1) + ".png", new Color(27, 30, 39), new Color(44, 46, 61), new Color(95, 98, 123), new Color(95, 98, 123), 15);
             car.setPreferredSize(new Dimension(65,65));
             car.setMaximumSize(new Dimension(65,65));
             car.setMinimumSize(new Dimension(65,65));
